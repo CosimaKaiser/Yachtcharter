@@ -1,0 +1,78 @@
+﻿@model YachtLib.Schiff
+
+@{
+    ViewBag.Title = "Schiff löschen";
+}
+
+<h2>Schiffsdaten löschen</h2>
+
+<h3>Hier können Sie ihre Schiffsdaten löschen</h3>
+<div>
+    <h4>Schiff</h4>
+    <hr />
+    @if (ViewBag.Admin == true)
+    {
+        <li>@Html.ActionLink("Meine Seite", "Admin", "Home")</li>
+    }
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Typ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Typ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Laenge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Laenge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Baujahr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Baujahr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Schiffsname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Schiffsname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Basis.Ort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Basis.Ort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Person.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Löschen" class="btn btn-default" /> |
+            @Html.ActionLink("Zurück zur Liste", "Index")
+        </div>
+    }
+</div>

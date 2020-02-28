@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="YachtModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="YachtModelStoreContainer">
+    <EntitySet Name="People" EntityType="YachtModel.Store.People" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bases" EntityType="YachtModel.Store.Bases" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Schiffs" EntityType="YachtModel.Store.Schiffs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Toerns" EntityType="YachtModel.Store.Toerns" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Macht" EntityType="YachtModel.Store.Macht" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="LiegtIn" Association="YachtModel.Store.LiegtIn">
+      <End Role="Schiff" EntitySet="Schiffs" />
+      <End Role="Basis" EntitySet="Bases" />
+    </AssociationSet>
+    <AssociationSet Name="IstEignerVon" Association="YachtModel.Store.IstEignerVon">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Schiff" EntitySet="Schiffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Macht_Person" Association="YachtModel.Store.FK_Macht_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Macht" EntitySet="Macht" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Macht_Toern" Association="YachtModel.Store.FK_Macht_Toern">
+      <End Role="Toern" EntitySet="Toerns" />
+      <End Role="Macht" EntitySet="Macht" />
+    </AssociationSet>
+    <AssociationSet Name="IstZugeordnet" Association="YachtModel.Store.IstZugeordnet">
+      <End Role="Schiff" EntitySet="Schiffs" />
+      <End Role="Toern" EntitySet="Toerns" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="People">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Vorname" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Adresse" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Segelschein" Type="bit" Nullable="true" />
+    <Property Name="RoleCustomer" Type="bit" Nullable="false" />
+    <Property Name="RoleAdmin" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bases">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ort" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Land" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Schiffs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EignerId" Type="int" Nullable="false" />
+    <Property Name="BasisId" Type="int" Nullable="false" />
+    <Property Name="PersonId1" Type="int" Nullable="false" />
+    <Property Name="Typ" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Laenge" Type="smallint" Nullable="false" />
+    <Property Name="Baujahr" Type="smallint" Nullable="false" />
+    <Property Name="Schiffsname" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Toerns">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SchiffId" Type="int" Nullable="false" />
+    <Property Name="Start" Type="datetime" Nullable="false" />
+    <Property Name="Ende" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Macht">
+    <Key>
+      <PropertyRef Name="People_Id" />
+      <PropertyRef Name="Toerns_Id" />
+    </Key>
+    <Property Name="People_Id" Type="int" Nullable="false" />
+    <Property Name="Toerns_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="LiegtIn">
+    <End Role="Schiff" Type="YachtModel.Store.Schiffs" Multiplicity="*" />
+    <End Role="Basis" Type="YachtModel.Store.Bases" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Basis">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Schiff">
+        <PropertyRef Name="BasisId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IstEignerVon">
+    <End Role="Person" Type="YachtModel.Store.People" Multiplicity="1" />
+    <End Role="Schiff" Type="YachtModel.Store.Schiffs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Schiff">
+        <PropertyRef Name="PersonId1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IstZugeordnet">
+    <End Role="Schiff" Type="YachtModel.Store.Schiffs" Multiplicity="1" />
+    <End Role="Toern" Type="YachtModel.Store.Toerns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Schiff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Toern">
+        <PropertyRef Name="SchiffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Macht_Person">
+    <End Role="Person" Type="YachtModel.Store.People" Multiplicity="1" />
+    <End Role="Macht" Type="YachtModel.Store.Macht" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Macht">
+        <PropertyRef Name="People_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Macht_Toern">
+    <End Role="Macht" Type="YachtModel.Store.Macht" Multiplicity="*" />
+    <End Role="Toern" Type="YachtModel.Store.Toerns" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Toern">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Macht">
+        <PropertyRef Name="Toerns_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="YachtModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="YachtModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="People" EntityType="YachtModel.Person" />
+          <EntitySet Name="Bases" EntityType="YachtModel.Basis" />
+          <EntitySet Name="Schiffs" EntityType="YachtModel.Schiff" />
+          <EntitySet Name="Toerns" EntityType="YachtModel.Toern" />
+          <AssociationSet Name="LiegtIn" Association="YachtModel.LiegtIn">
+            <End Role="Schiff" EntitySet="Schiffs" />
+            <End Role="Basis" EntitySet="Bases" />
+          </AssociationSet>
+          <AssociationSet Name="IstEignerVon" Association="YachtModel.IstEignerVon">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Schiff" EntitySet="Schiffs" />
+          </AssociationSet>
+          <AssociationSet Name="Macht" Association="YachtModel.Macht">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Toern" EntitySet="Toerns" />
+          </AssociationSet>
+          <AssociationSet Name="IstZugeordnet" Association="YachtModel.IstZugeordnet">
+            <End Role="Schiff" EntitySet="Schiffs" />
+            <End Role="Toern" EntitySet="Toerns" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Schiffs" Relationship="YachtModel.IstEignerVon" FromRole="Person" ToRole="Schiff" />
+          <NavigationProperty Name="Toerns" Relationship="YachtModel.Macht" FromRole="Person" ToRole="Toern" />
+          <Property Name="Name" Type="String" Nullable="true" Unicode="true" />
+          <Property Name="Vorname" Type="String" Nullable="true" Unicode="true" />
+          <Property Name="Adresse" Type="String" Nullable="true" Unicode="true" />
+          <Property Name="Segelschein" Type="Boolean" Nullable="true" />
+          <Property Name="RoleCustomer" Nullable="false" Type="Boolean" />
+          <Property Name="RoleAdmin" Nullable="false" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Basis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Schiffs" Relationship="YachtModel.LiegtIn" FromRole="Basis" ToRole="Schiff" />
+          <Property Name="Ort" Type="String" Nullable="false" Unicode="true" />
+          <Property Name="Land" Type="String" Nullable="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Schiff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EignerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Basis" Relationship="YachtModel.LiegtIn" FromRole="Schiff" ToRole="Basis" />
+          <Property Name="BasisId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="YachtModel.IstEignerVon" FromRole="Schiff" ToRole="Person" />
+          <Property Name="PersonId1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Toerns" Relationship="YachtModel.IstZugeordnet" FromRole="Schiff" ToRole="Toern" />
+          <Property Name="Typ" Type="String" Nullable="false" Unicode="true" >
+            <Documentation>
+              <LongDescription>Test</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="Laenge" Type="Int16" Nullable="false" cg:SetterAccess="Public" />
+          <Property Name="Baujahr" Type="Int16" Nullable="false" />
+          <Property Name="Schiffsname" Type="String" Nullable="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Toern">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="People" Relationship="YachtModel.Macht" FromRole="Toern" ToRole="Person" />
+          <NavigationProperty Name="Schiff" Relationship="YachtModel.IstZugeordnet" FromRole="Toern" ToRole="Schiff" />
+          <Property Name="SchiffId" Type="Int32" Nullable="false" />
+          <Property Name="Start" Type="DateTime" Nullable="false" />
+          <Property Name="Ende" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <Association Name="LiegtIn">
+          <End Type="YachtModel.Schiff" Role="Schiff" Multiplicity="*" />
+          <End Type="YachtModel.Basis" Role="Basis" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Basis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Schiff">
+              <PropertyRef Name="BasisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IstEignerVon">
+          <End Type="YachtModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="YachtModel.Schiff" Role="Schiff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Schiff">
+              <PropertyRef Name="PersonId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Macht">
+          <End Type="YachtModel.Person" Role="Person" Multiplicity="*" />
+          <End Type="YachtModel.Toern" Role="Toern" Multiplicity="*" />
+        </Association>
+        <Association Name="IstZugeordnet">
+          <End Type="YachtModel.Schiff" Role="Schiff" Multiplicity="1" />
+          <End Type="YachtModel.Toern" Role="Toern" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schiff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Toern">
+              <PropertyRef Name="SchiffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="YachtModelStoreContainer" CdmEntityContainer="YachtModelContainer">
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="IsTypeOf(YachtModel.Person)">
+        <MappingFragment StoreEntitySet="People">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+          <ScalarProperty Name="Segelschein" ColumnName="Segelschein" />
+          <ScalarProperty Name="RoleCustomer" ColumnName="RoleCustomer" />
+          <ScalarProperty Name="RoleAdmin" ColumnName="RoleAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bases">
+      <EntityTypeMapping TypeName="IsTypeOf(YachtModel.Basis)">
+        <MappingFragment StoreEntitySet="Bases">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ort" ColumnName="Ort" />
+          <ScalarProperty Name="Land" ColumnName="Land" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Schiffs">
+      <EntityTypeMapping TypeName="IsTypeOf(YachtModel.Schiff)">
+        <MappingFragment StoreEntitySet="Schiffs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EignerId" ColumnName="EignerId" />
+          <ScalarProperty Name="BasisId" ColumnName="BasisId" />
+          <ScalarProperty Name="PersonId1" ColumnName="PersonId1" />
+          <ScalarProperty Name="Typ" ColumnName="Typ" />
+          <ScalarProperty Name="Laenge" ColumnName="Laenge" />
+          <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+          <ScalarProperty Name="Schiffsname" ColumnName="Schiffsname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Toerns">
+      <EntityTypeMapping TypeName="IsTypeOf(YachtModel.Toern)">
+        <MappingFragment StoreEntitySet="Toerns">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SchiffId" ColumnName="SchiffId" />
+          <ScalarProperty Name="Start" ColumnName="Start" />
+          <ScalarProperty Name="Ende" ColumnName="Ende" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Macht" TypeName="YachtModel.Macht" StoreEntitySet="Macht">
+      <EndProperty Name="Person">
+        <ScalarProperty Name="Id" ColumnName="People_Id" />
+      </EndProperty>
+      <EndProperty Name="Toern">
+        <ScalarProperty Name="Id" ColumnName="Toerns_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

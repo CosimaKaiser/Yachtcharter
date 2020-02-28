@@ -1,0 +1,44 @@
+﻿@model IEnumerable<YachtLib.Basis>
+
+@{
+    ViewBag.Title = "Segelgebiete";
+}
+
+<h2>Segelgebiete</h2>
+@if (ViewBag.Admin == true)
+{
+        <p>
+        @Html.ActionLink("neue Basis anlegen", "Create")
+    </p>
+}
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Land)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ort)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Land)
+        </td>
+              
+            <td>
+                @Html.ActionLink("Anpassen", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Löschen", "Delete", new { id = item.Id })
+            </td>
+        
+        </tr>
+        }
+
+    </table>

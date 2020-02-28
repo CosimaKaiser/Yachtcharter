@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Yacht Charter";
+}
+
+<div class="jumbotron">
+    <h1>YACHT CHARTER</h1>
+    <p class="lead">YACHT CHARTER 
+    Eine Plattform zum anlegen von Törns mit Segel- oder Motorbooten.
+    Zusätzlich lässt sich ein Liste aller Passagiere auf einem Boot anzeigen.</p>
+   
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Segelcrew</h2>
+        <p>
+            Sind sie bei uns schon in der Segler-Liste vorhanden?
+            Wenn ja, dann lassen sie sich ihre Crewlisten ihrer letzten Törns anzeigen.
+            Wenn nicht, erstellen sie eine neue Crewliste und das Abenteuer kann beginnen!
+        </p>
+
+        <li>@Html.ActionLink("Personen anzeigen", "Index", "People")</li>
+        <li>@Html.ActionLink("Person anlegen", "Create", "People")</li>
+
+
+      
+    </div>
+    <div class="col-md-4">
+        <h2>Flotte</h2>
+        <p>Entdecken Sie unsere große Auswahl an Motor- und Segelbooten.</p>
+
+        <li>@Html.ActionLink("Boote anzeigen", "Index", "Schiffs")</li>
+        @if (ViewBag.Admin == true)
+
+        {
+            <li>@Html.ActionLink("neues Boot anlegen", "Create", "Schiffs")</li>
+        }
+
+        </div>
+    <div class="col-md-4">
+        <h2>Segelgebiete</h2>
+        <p>Hier finden Sie die schönsten Segelgebiete entlang der Adria.</p>
+
+        <li>@Html.ActionLink("Häfen anzeigen", "Index", "Bases")</li>
+        @if (ViewBag.Admin == true)
+
+        {
+            <li>@Html.ActionLink("neuen Hafen anlegen", "Create", "Bases")</li>
+        }
+
+        </div>
+    <div class="col-md-4">
+        <h2>Törn anlegen</h2>
+        <p>
+            Buchen sie ein Boot für ihren nächsten Törn! Oder bearbeiten Sie ihren aktuell gebuchten Törn!
+        </p>
+
+        <li>@Html.ActionLink("Törn anzeigen", "Index", "Toerns")</li>
+        <li>@Html.ActionLink("neuen Törn anlegen", "Create", "Toerns")</li>
+        
+      
+    </div>
+</div>

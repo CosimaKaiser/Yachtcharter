@@ -1,0 +1,80 @@
+﻿@model YachtLib.Schiff
+
+@{
+    ViewBag.Title = "Order";
+}
+
+<h2>Order</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Schiff</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EignerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EignerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Typ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Typ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Laenge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Laenge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Baujahr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Baujahr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Schiffsname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Schiffsname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Basis.Ort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Basis.Ort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Person.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

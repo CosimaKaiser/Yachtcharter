@@ -1,0 +1,66 @@
+﻿@model YachtLib.Person
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<h2>Hier sehen sie die Personendaten auf eine Blick. Bitte Überprüfen Sie diese auf Richtigkeit!</h2>
+<div>
+    <h4>Person</h4>
+    <hr />
+    @if (ViewBag.Admin == true)
+    {
+        <li>@Html.ActionLink("Meine Seite", "Admin", "Home")</li>
+    }
+    else
+           if (ViewBag.Customer == true)
+    {
+        <li>@Html.ActionLink("Meine Seite", "Kunde", "Home")</li>
+    }
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Vorname)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Vorname)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Adresse)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Adresse)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Segelschein)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Segelschein)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.RoleAdmin)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.RoleAdmin)
+    </dd>
+
+</dl>
+</div>
+<p>
+    @Html.ActionLink("Anpassen", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Zurück zur Liste", "Index")
+</p>

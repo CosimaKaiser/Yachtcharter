@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6fa331373d7f47c7abaf3aff2eb1c408" Name="Diagram1" ZoomLevel="112" >
+        <EntityTypeShape EntityType="YachtModel.Person" Width="1.5" PointX="7.125" PointY="0.875" />
+        <EntityTypeShape EntityType="YachtModel.Basis" Width="1.5" PointX="2.5" PointY="1" />
+        <EntityTypeShape EntityType="YachtModel.Schiff" Width="1.5" PointX="2.5" PointY="3.375" />
+        <EntityTypeShape EntityType="YachtModel.Toern" Width="1.5" PointX="7.125" PointY="4.375" />
+        <AssociationConnector Association="YachtModel.LiegtIn" />
+        <AssociationConnector Association="YachtModel.IstEignerVon" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="YachtModel.Macht" />
+        <AssociationConnector Association="YachtModel.IstZugeordnet" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

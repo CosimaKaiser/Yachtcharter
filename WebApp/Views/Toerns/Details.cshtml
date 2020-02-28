@@ -1,0 +1,42 @@
+﻿@model YachtLib.Toern
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Toern Details</h2>
+
+<div>
+    <h4>Hier sehen Sie ihre Törndetails auf einen Blick. Sollten Sie Fragen dazu haben, können Sie sich gern bei uns melden.</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ende)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ende)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Schiff.Typ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Schiff.Typ)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Anpassen", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Zurück zur Liste", "Index")
+</p>

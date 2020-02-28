@@ -1,0 +1,74 @@
+﻿@model YachtLib.Schiff
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Schiff</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EignerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EignerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Typ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Typ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Laenge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Laenge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Baujahr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Baujahr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Schiffsname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Schiffsname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Basis.Ort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Basis.Ort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Person.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

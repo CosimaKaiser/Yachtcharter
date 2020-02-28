@@ -1,0 +1,66 @@
+﻿@model YachtLib.Person
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Person Löschen</h2>
+
+<h3>Sind sie sicher, dass sie die Person löschen wollen?</h3>
+<div>
+    <h4>Person</h4>
+    <hr />
+    @if (ViewBag.Admin == true)
+    {
+        <li>@Html.ActionLink("Meine Seite", "Admin", "Home")</li>
+    }
+    else
+           if (ViewBag.Customer == true)
+    {
+        <li>@Html.ActionLink("Meine Seite", "Kunde", "Home")</li>
+    }
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vorname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vorname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adresse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adresse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Segelschein)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Segelschein)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Löschen" class="btn btn-default" /> |
+            @Html.ActionLink("Zurück zur Liste", "Index")
+        </div>
+    }
+</div>
